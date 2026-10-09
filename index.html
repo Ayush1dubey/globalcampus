@@ -1,0 +1,5258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>IT Helpdesk & Complaint Management System</title>
+
+<meta name="description"
+content="Professional IT Helpdesk and Complaint Management System for educational institutions.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+rel="stylesheet">
+
+<link
+href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+rel="stylesheet">
+
+<link
+href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+rel="stylesheet">
+
+
+<style>
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+:root{
+
+    --primary:#2563eb;
+    --primary-dark:#1d4ed8;
+    --secondary:#0f172a;
+    --success:#16a34a;
+    --warning:#f59e0b;
+    --danger:#dc2626;
+
+    --bg:#f8fafc;
+    --card:#ffffff;
+    --text:#0f172a;
+    --muted:#64748b;
+    --border:#e2e8f0;
+
+    --shadow:0 15px 40px rgba(15,23,42,.08);
+    --shadow-hover:0 20px 50px rgba(15,23,42,.13);
+
+    --radius:20px;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    font-family:"Inter",sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.6;
+
+    transition:.3s ease;
+}
+
+a{
+    text-decoration:none;
+}
+
+img{
+    max-width:100%;
+}
+
+.section-padding{
+    padding:90px 0;
+}
+
+.section-title{
+    font-size:38px;
+    font-weight:800;
+    margin-bottom:15px;
+}
+
+.section-subtitle{
+    color:var(--muted);
+    max-width:700px;
+    margin:0 auto 45px;
+}
+
+.text-primary-custom{
+    color:var(--primary);
+}
+
+
+/* =========================================================
+   LOADER
+========================================================= */
+
+#loader{
+
+    position:fixed;
+    inset:0;
+
+    background:#0f172a;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    z-index:99999;
+
+    color:white;
+
+    transition:.5s ease;
+}
+
+.loader-logo{
+
+    width:75px;
+    height:75px;
+
+    border-radius:20px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:linear-gradient(135deg,#2563eb,#7c3aed);
+
+    font-size:34px;
+
+    margin-bottom:20px;
+
+    animation:pulse 1.5s infinite;
+}
+
+.loader-title{
+    font-size:22px;
+    font-weight:800;
+}
+
+.loader-subtitle{
+    color:#cbd5e1;
+    font-size:13px;
+}
+
+@keyframes pulse{
+
+    0%,100%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.08);
+    }
+}
+
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.navbar{
+
+    background:rgba(255,255,255,.92)!important;
+
+    backdrop-filter:blur(15px);
+
+    box-shadow:0 5px 25px rgba(15,23,42,.06);
+
+    transition:.3s ease;
+}
+
+.navbar-brand{
+
+    font-weight:800;
+    color:var(--secondary)!important;
+
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.brand-icon{
+
+    width:45px;
+    height:45px;
+
+    border-radius:13px;
+
+    background:linear-gradient(135deg,#2563eb,#7c3aed);
+
+    color:white;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:22px;
+}
+
+.brand-text small{
+
+    display:block;
+    font-size:10px;
+    color:var(--muted);
+    letter-spacing:.5px;
+}
+
+.nav-link{
+
+    font-weight:600;
+    color:#334155!important;
+
+    margin:0 5px;
+
+    transition:.3s;
+}
+
+.nav-link:hover{
+    color:var(--primary)!important;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+
+    min-height:100vh;
+
+    padding-top:120px;
+    padding-bottom:80px;
+
+    display:flex;
+    align-items:center;
+
+    background:
+    radial-gradient(circle at top right,rgba(37,99,235,.14),transparent 35%),
+    radial-gradient(circle at bottom left,rgba(124,58,237,.10),transparent 30%),
+    #f8fafc;
+}
+
+.hero-badge{
+
+    display:inline-flex;
+
+    padding:8px 14px;
+
+    border-radius:50px;
+
+    background:#dbeafe;
+
+    color:#1d4ed8;
+
+    font-weight:700;
+
+    font-size:13px;
+
+    margin-bottom:20px;
+}
+
+.hero h1{
+
+    font-size:58px;
+
+    line-height:1.1;
+
+    font-weight:800;
+
+    letter-spacing:-2px;
+
+    margin-bottom:20px;
+}
+
+.hero h1 span{
+    color:var(--primary);
+}
+
+.hero p{
+
+    color:var(--muted);
+
+    font-size:18px;
+
+    max-width:650px;
+
+    margin-bottom:30px;
+}
+
+.hero-buttons{
+
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+}
+
+.btn-custom{
+
+    padding:13px 22px;
+
+    border-radius:12px;
+
+    font-weight:700;
+
+    transition:.3s;
+
+    border:none;
+}
+
+.btn-primary-custom{
+
+    background:var(--primary);
+    color:white;
+}
+
+.btn-primary-custom:hover{
+
+    background:var(--primary-dark);
+    color:white;
+
+    transform:translateY(-2px);
+}
+
+.btn-success-custom{
+
+    background:var(--success);
+    color:white;
+}
+
+.btn-success-custom:hover{
+
+    background:#15803d;
+    color:white;
+
+    transform:translateY(-2px);
+}
+
+.hero-card{
+
+    background:white;
+
+    padding:35px;
+
+    border-radius:30px;
+
+    box-shadow:var(--shadow);
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.hero-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:180px;
+    height:180px;
+
+    background:#dbeafe;
+
+    border-radius:50%;
+
+    top:-80px;
+    right:-60px;
+}
+
+.hero-icon{
+
+    width:85px;
+    height:85px;
+
+    border-radius:25px;
+
+    background:linear-gradient(135deg,#2563eb,#7c3aed);
+
+    color:white;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:40px;
+
+    margin-bottom:25px;
+
+    position:relative;
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+.stats-section{
+    margin-top:-40px;
+    position:relative;
+    z-index:5;
+}
+
+.stat-card{
+
+    background:white;
+
+    padding:28px;
+
+    border-radius:18px;
+
+    box-shadow:var(--shadow);
+
+    text-align:center;
+
+    transition:.3s;
+}
+
+.stat-card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:var(--shadow-hover);
+}
+
+.stat-card i{
+
+    font-size:30px;
+
+    color:var(--primary);
+
+    margin-bottom:10px;
+}
+
+.stat-number{
+
+    font-size:32px;
+
+    font-weight:800;
+}
+
+.stat-label{
+
+    color:var(--muted);
+
+    font-size:14px;
+}
+
+
+/* =========================================================
+   ABOUT
+========================================================= */
+
+.about-card{
+
+    background:white;
+
+    padding:35px;
+
+    border-radius:25px;
+
+    box-shadow:var(--shadow);
+}
+
+.about-icon{
+
+    width:60px;
+    height:60px;
+
+    background:#dbeafe;
+
+    color:var(--primary);
+
+    border-radius:16px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:28px;
+
+    margin-bottom:20px;
+}
+
+.check-list{
+
+    list-style:none;
+
+    padding:0;
+
+    margin-top:25px;
+}
+
+.check-list li{
+
+    margin-bottom:12px;
+
+    display:flex;
+    gap:10px;
+
+    color:#475569;
+}
+
+.check-list i{
+    color:var(--success);
+}
+
+
+/* =========================================================
+   SERVICES
+========================================================= */
+
+.service-card{
+
+    height:100%;
+
+    background:white;
+
+    border:1px solid var(--border);
+
+    padding:30px;
+
+    border-radius:20px;
+
+    transition:.3s;
+
+    box-shadow:0 8px 25px rgba(15,23,42,.04);
+}
+
+.service-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:var(--shadow-hover);
+
+    border-color:#bfdbfe;
+}
+
+.service-icon{
+
+    width:60px;
+    height:60px;
+
+    border-radius:16px;
+
+    background:#eff6ff;
+
+    color:var(--primary);
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    font-size:27px;
+
+    margin-bottom:20px;
+}
+
+.service-card h4{
+
+    font-size:20px;
+
+    font-weight:700;
+
+    margin-bottom:10px;
+}
+
+.service-card p{
+
+    color:var(--muted);
+
+    margin:0;
+}
+
+
+/* =========================================================
+   HOW IT WORKS
+========================================================= */
+
+.step-card{
+
+    text-align:center;
+
+    padding:30px;
+
+    position:relative;
+}
+
+.step-number{
+
+    width:65px;
+    height:65px;
+
+    border-radius:50%;
+
+    background:var(--primary);
+
+    color:white;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    margin:0 auto 20px;
+
+    font-size:23px;
+
+    font-weight:800;
+}
+
+.step-card h5{
+    font-weight:700;
+}
+
+.step-card p{
+    color:var(--muted);
+}
+
+
+/* =========================================================
+   COMPLAINT FORM
+========================================================= */
+
+.form-wrapper{
+
+    background:white;
+
+    padding:40px;
+
+    border-radius:25px;
+
+    box-shadow:var(--shadow);
+}
+
+.form-label{
+
+    font-weight:600;
+
+    margin-bottom:7px;
+}
+
+.form-control,
+.form-select{
+
+    padding:13px 15px;
+
+    border-radius:12px;
+
+    border:1px solid var(--border);
+
+    background:#fff;
+
+    transition:.3s;
+}
+
+.form-control:focus,
+.form-select:focus{
+
+    border-color:var(--primary);
+
+    box-shadow:0 0 0 4px rgba(37,99,235,.1);
+}
+
+textarea.form-control{
+    min-height:140px;
+    resize:vertical;
+}
+
+.form-note{
+
+    background:#eff6ff;
+
+    color:#1e40af;
+
+    padding:15px;
+
+    border-radius:12px;
+
+    font-size:14px;
+
+    margin-bottom:25px;
+}
+
+
+/* =========================================================
+   TRACK
+========================================================= */
+
+.track-box{
+
+    max-width:650px;
+
+    margin:auto;
+
+    background:white;
+
+    padding:35px;
+
+    border-radius:25px;
+
+    box-shadow:var(--shadow);
+}
+
+.track-result{
+
+    margin-top:25px;
+
+    display:none;
+}
+
+.complaint-summary{
+
+    background:#f8fafc;
+
+    padding:20px;
+
+    border-radius:15px;
+}
+
+.status-badge{
+
+    display:inline-block;
+
+    padding:7px 13px;
+
+    border-radius:50px;
+
+    font-size:12px;
+
+    font-weight:700;
+}
+
+.status-submitted{
+    background:#dbeafe;
+    color:#1d4ed8;
+}
+
+.status-assigned{
+    background:#fef3c7;
+    color:#92400e;
+}
+
+.status-progress{
+    background:#ede9fe;
+    color:#6d28d9;
+}
+
+.status-resolved{
+    background:#dcfce7;
+    color:#166534;
+}
+
+
+/* =========================================================
+   CONTACT
+========================================================= */
+
+.contact-card{
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    box-shadow:var(--shadow);
+
+    height:100%;
+}
+
+.contact-icon{
+
+    width:55px;
+    height:55px;
+
+    background:#eff6ff;
+
+    color:var(--primary);
+
+    border-radius:15px;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    font-size:25px;
+
+    margin-bottom:15px;
+}
+
+.contact-card h5{
+    font-weight:700;
+}
+
+.contact-card p{
+    color:var(--muted);
+}
+
+
+/* =========================================================
+   FAQ
+========================================================= */
+
+.accordion-item{
+
+    border:none;
+
+    margin-bottom:12px;
+
+    border-radius:15px!important;
+
+    overflow:hidden;
+
+    box-shadow:0 5px 20px rgba(15,23,42,.05);
+}
+
+.accordion-button{
+
+    font-weight:700;
+
+    padding:20px;
+
+    background:white;
+}
+
+.accordion-button:not(.collapsed){
+
+    background:#eff6ff;
+
+    color:var(--primary);
+
+    box-shadow:none;
+}
+
+.accordion-body{
+    color:#64748b;
+    line-height:1.8;
+}
+
+
+/* =========================================================
+   ADMIN
+========================================================= */
+
+#adminSection{
+    display:none;
+}
+
+.admin-panel{
+
+    background:white;
+
+    border-radius:25px;
+
+    padding:30px;
+
+    box-shadow:var(--shadow);
+
+    overflow:hidden;
+}
+
+.admin-stat{
+
+    padding:22px;
+
+    border-radius:16px;
+
+    background:#f8fafc;
+
+    border:1px solid var(--border);
+}
+
+.admin-stat h3{
+
+    font-size:28px;
+
+    font-weight:800;
+
+    margin:0;
+}
+
+.admin-stat p{
+
+    color:var(--muted);
+
+    margin:5px 0 0;
+}
+
+.table-responsive{
+    border-radius:15px;
+}
+
+.table{
+    margin:0;
+    vertical-align:middle;
+}
+
+.table th{
+
+    background:#f8fafc;
+
+    font-size:13px;
+
+    white-space:nowrap;
+}
+
+.table td{
+    font-size:13px;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer{
+
+    background:#0f172a;
+
+    color:#cbd5e1;
+
+    padding:50px 0 25px;
+}
+
+.footer-brand{
+
+    font-size:22px;
+
+    font-weight:800;
+
+    color:white;
+
+    margin-bottom:10px;
+}
+
+.footer-text{
+
+    color:#94a3b8;
+
+    max-width:550px;
+}
+
+.footer-bottom{
+
+    border-top:1px solid rgba(255,255,255,.1);
+
+    margin-top:35px;
+
+    padding-top:20px;
+
+    color:#64748b;
+
+    font-size:13px;
+
+    text-align:center;
+}
+
+.developer-credit{
+
+    margin-top:12px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:5px;
+}
+
+.developer-credit strong{
+    color:white;
+}
+
+.creator-role{
+    color:#94a3b8;
+}
+
+.youtube-link{
+
+    color:#ef4444;
+
+    font-weight:600;
+
+    transition:.3s;
+}
+
+.youtube-link:hover{
+    color:#f87171;
+}
+
+
+/* =========================================================
+   FLOATING WHATSAPP
+========================================================= */
+
+.whatsapp-float{
+
+    position:fixed;
+
+    right:25px;
+    bottom:25px;
+
+    width:60px;
+    height:60px;
+
+    border-radius:50%;
+
+    background:#25d366;
+
+    color:white;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    font-size:30px;
+
+    box-shadow:0 10px 30px rgba(37,211,102,.35);
+
+    z-index:1000;
+
+    transition:.3s;
+}
+
+.whatsapp-float:hover{
+
+    color:white;
+
+    transform:scale(1.08);
+}
+
+
+/* =========================================================
+   BACK TO TOP
+========================================================= */
+
+#backToTop{
+
+    position:fixed;
+
+    right:25px;
+    bottom:100px;
+
+    width:45px;
+    height:45px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:var(--primary);
+
+    color:white;
+
+    display:none;
+
+    justify-content:center;
+    align-items:center;
+
+    z-index:999;
+
+    box-shadow:var(--shadow);
+
+    transition:.3s;
+}
+
+#backToTop:hover{
+    transform:translateY(-3px);
+}
+
+
+/* =========================================================
+   MODALS
+========================================================= */
+
+.modal-content{
+
+    border:none;
+
+    border-radius:22px;
+
+    overflow:hidden;
+
+    box-shadow:0 25px 70px rgba(15,23,42,.2);
+}
+
+.modal-header{
+
+    background:#f8fafc;
+
+    border-bottom:1px solid var(--border);
+}
+
+.modal-title{
+    font-weight:800;
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast-container{
+    z-index:99999;
+}
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+body.dark-mode{
+
+    --bg:#020617;
+    --card:#0f172a;
+    --text:#f8fafc;
+    --muted:#94a3b8;
+    --border:#1e293b;
+
+    background:#020617;
+    color:#f8fafc;
+}
+
+.dark-mode .navbar{
+
+    background:rgba(15,23,42,.94)!important;
+}
+
+.dark-mode .navbar-brand,
+.dark-mode .nav-link{
+    color:#f8fafc!important;
+}
+
+.dark-mode .hero{
+    background:#020617;
+}
+
+.dark-mode .hero-card,
+.dark-mode .stat-card,
+.dark-mode .about-card,
+.dark-mode .service-card,
+.dark-mode .form-wrapper,
+.dark-mode .track-box,
+.dark-mode .contact-card,
+.dark-mode .admin-panel,
+.dark-mode .modal-content{
+
+    background:#0f172a;
+
+    color:#f8fafc;
+
+    border-color:#1e293b;
+}
+
+.dark-mode .form-control,
+.dark-mode .form-select{
+
+    background:#020617;
+
+    color:white;
+
+    border-color:#334155;
+}
+
+.dark-mode .accordion-item,
+.dark-mode .accordion-button{
+
+    background:#0f172a;
+
+    color:#f8fafc;
+}
+
+.dark-mode .accordion-button:not(.collapsed){
+    background:#172554;
+    color:#93c5fd;
+}
+
+.dark-mode .complaint-summary,
+.dark-mode .admin-stat,
+.dark-mode .table th{
+
+    background:#020617;
+}
+
+.dark-mode .text-muted{
+    color:#94a3b8!important;
+}
+
+.dark-mode .modal-header{
+    background:#0f172a;
+    border-color:#1e293b;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:991px){
+
+    .hero h1{
+        font-size:45px;
+    }
+
+    .hero-card{
+        margin-top:40px;
+    }
+}
+
+@media(max-width:767px){
+
+    .section-padding{
+        padding:65px 0;
+    }
+
+    .section-title{
+        font-size:30px;
+    }
+
+    .hero{
+        padding-top:110px;
+    }
+
+    .hero h1{
+        font-size:38px;
+        letter-spacing:-1px;
+    }
+
+    .hero p{
+        font-size:16px;
+    }
+
+    .form-wrapper{
+        padding:25px;
+    }
+
+    .whatsapp-float{
+        right:18px;
+        bottom:18px;
+    }
+
+    #backToTop{
+        right:18px;
+        bottom:88px;
+    }
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     LOADER
+===================================================== -->
+
+<div id="loader">
+
+    <div class="loader-logo">
+        <i class="bi bi-headset"></i>
+    </div>
+
+    <div class="loader-title">
+        IT HELPDESK
+    </div>
+
+    <div class="loader-subtitle">
+        Complaint Management System
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<nav class="navbar navbar-expand-lg fixed-top">
+
+<div class="container">
+
+<a class="navbar-brand" href="#home">
+
+    <div class="brand-icon">
+        <i class="bi bi-headset"></i>
+    </div>
+
+    <div class="brand-text">
+
+        IT HELPDESK
+
+        <small>
+            COMPLAINT MANAGEMENT SYSTEM
+        </small>
+
+    </div>
+
+</a>
+
+
+<button
+class="navbar-toggler"
+type="button"
+data-bs-toggle="collapse"
+data-bs-target="#mainNav">
+
+<i class="bi bi-list"></i>
+
+</button>
+
+
+<div class="collapse navbar-collapse" id="mainNav">
+
+<ul class="navbar-nav ms-auto align-items-lg-center">
+
+<li class="nav-item">
+<a class="nav-link" href="#home">Home</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="#about">About</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="#services">Services</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="#how-it-works">How It Works</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="#track">Track Complaint</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="#faq">FAQ</a>
+</li>
+
+<li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+
+<button
+class="btn btn-sm btn-outline-primary rounded-pill"
+onclick="toggleDarkMode()">
+
+<i class="bi bi-moon-stars" id="darkModeIcon"></i>
+
+</button>
+
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</nav>
+
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero" id="home">
+
+<div class="container">
+
+<div class="row align-items-center g-5">
+
+<div class="col-lg-7">
+
+<div class="hero-badge">
+
+<i class="bi bi-shield-check me-2"></i>
+
+Smart IT Support System
+
+</div>
+
+
+<h1>
+
+Fast. Simple.
+<span>Reliable IT Support.</span>
+
+</h1>
+
+
+<p>
+
+Report technical problems, track your complaints
+and connect directly with the IT Support Team
+through one professional platform.
+
+</p>
+
+
+<div class="hero-buttons">
+
+<a href="#complaint"
+class="btn btn-custom btn-primary-custom">
+
+<i class="bi bi-plus-circle me-2"></i>
+
+Raise a Complaint
+
+</a>
+
+
+<a
+href="https://wa.me/917066075000?text=Hello%20IT%20Support%2C%20I%20need%20technical%20assistance."
+target="_blank"
+class="btn btn-custom btn-success-custom">
+
+<i class="bi bi-whatsapp me-2"></i>
+
+Chat on WhatsApp
+
+</a>
+
+</div>
+
+</div>
+
+
+<div class="col-lg-5">
+
+<div class="hero-card">
+
+<div class="hero-icon">
+
+<i class="bi bi-headset"></i>
+
+</div>
+
+<h3 class="fw-bold">
+Need Technical Support?
+</h3>
+
+<p class="text-muted">
+
+Our IT Helpdesk provides a centralized
+way to report hardware, software,
+network and other technical issues.
+
+</p>
+
+
+<div class="d-grid gap-2 mt-4">
+
+<a
+href="tel:+917066075000"
+class="btn btn-outline-primary">
+
+<i class="bi bi-telephone me-2"></i>
+
+Call IT Support
+
+</a>
+
+
+<a
+href="#track"
+class="btn btn-light">
+
+<i class="bi bi-search me-2"></i>
+
+Track Your Complaint
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     STATS
+===================================================== -->
+
+<section class="stats-section">
+
+<div class="container">
+
+<div class="row g-3">
+
+<div class="col-md-3 col-6">
+
+<div class="stat-card">
+
+<i class="bi bi-ticket-perforated"></i>
+
+<div class="stat-number" id="totalComplaints">
+0
+</div>
+
+<div class="stat-label">
+Total Complaints
+</div>
+
+</div>
+
+</div>
+
+
+<div class="col-md-3 col-6">
+
+<div class="stat-card">
+
+<i class="bi bi-send-check"></i>
+
+<div class="stat-number" id="submittedComplaints">
+0
+</div>
+
+<div class="stat-label">
+Submitted
+</div>
+
+</div>
+
+</div>
+
+
+<div class="col-md-3 col-6">
+
+<div class="stat-card">
+
+<i class="bi bi-hourglass-split"></i>
+
+<div class="stat-number" id="progressComplaints">
+0
+</div>
+
+<div class="stat-label">
+In Progress
+</div>
+
+</div>
+
+</div>
+
+
+<div class="col-md-3 col-6">
+
+<div class="stat-card">
+
+<i class="bi bi-check-circle"></i>
+
+<div class="stat-number" id="resolvedComplaints">
+0
+</div>
+
+<div class="stat-label">
+Resolved
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     ABOUT
+===================================================== -->
+
+<section class="section-padding" id="about">
+
+<div class="container">
+
+<div class="text-center">
+
+<div class="text-primary-custom fw-bold">
+ABOUT THE SYSTEM
+</div>
+
+<h2 class="section-title">
+Professional IT Support
+</h2>
+
+<p class="section-subtitle">
+
+A centralized complaint management platform
+designed to make technical support faster,
+clearer and easier to manage.
+
+</p>
+
+</div>
+
+
+<div class="row g-4">
+
+<div class="col-lg-4">
+
+<div class="about-card h-100">
+
+<div class="about-icon">
+
+<i class="bi bi-laptop"></i>
+
+</div>
+
+<h4 class="fw-bold">
+Easy Complaint Registration
+</h4>
+
+<p class="text-muted">
+
+Submit your technical issue by entering
+basic information and describing the
+problem clearly.
+
+</p>
+
+<ul class="check-list">
+
+<li>
+<i class="bi bi-check-circle-fill"></i>
+Simple online complaint form
+</li>
+
+<li>
+<i class="bi bi-check-circle-fill"></i>
+Automatic complaint ID
+</li>
+
+<li>
+<i class="bi bi-check-circle-fill"></i>
+WhatsApp notification
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+
+<div class="col-lg-4">
+
+<div class="about-card h-100">
+
+<div class="about-icon">
+
+<i class="bi bi-graph-up-arrow"></i>
+
+</div>
+
+<h4 class="fw-bold">
+Complaint Tracking
+</h4>
+
+<p class="text-muted">
+
+Track your complaint using the unique
+Complaint ID generated after submission.
+
+</p>
+
+<ul class="check-list">
+
+<li>
+<i class="bi bi-check-circle-fill"></i>
+Real-time local status tracking
+</li>
+
+<li>
+<i class="bi bi-check-circle-fill"></i>
+Complaint timeline
+</li>
+
+<li>
+<i class="bi bi-check-circle-fill"></i>
+Resolution information
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+
+<div class="col-lg-4">
+
+<div class="about-card h-100">
+
+<div class="about-icon">
+
+<i class="bi bi-shield-check"></i>
+
+</div>
+
+<h4 class="fw-bold">
+Organized IT Management
+</h4>
+
+<p class="text-muted">
+
+The admin dashboard helps the support
+team organize, update and manage
+complaints efficiently.
+
+</p>
+
+<ul class="check-list">
+
+<li>
+<i class="bi bi-check-circle-fill"></i>
+Status management
+</li>
+
+<li>
+<i class="bi bi-person-check"></i>
+Assignment tracking
+</li>
+
+<li>
+<i class="bi bi-download"></i>
+CSV export
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     SERVICES
+===================================================== -->
+
+<section class="section-padding bg-light" id="services">
+
+<div class="container">
+
+<div class="text-center">
+
+<div class="text-primary-custom fw-bold">
+IT SUPPORT SERVICES
+</div>
+
+<h2 class="section-title">
+What Can You Report?
+</h2>
+
+<p class="section-subtitle">
+
+Report common technical problems through
+the centralized IT Helpdesk.
+
+</p>
+
+</div>
+
+
+<div class="row g-4">
+
+<div class="col-lg-3 col-md-6">
+
+<div class="service-card">
+
+<div class="service-icon">
+<i class="bi bi-pc-display"></i>
+</div>
+
+<h4>Hardware</h4>
+
+<p>
+Computer, keyboard, mouse, monitor,
+CPU and other hardware problems.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="col-lg-3 col-md-6">
+
+<div class="service-card">
+
+<div class="service-icon">
+<i class="bi bi-wifi"></i>
+</div>
+
+<h4>Network</h4>
+
+<p>
+Internet connectivity, Wi-Fi,
+LAN and network access issues.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="col-lg-3 col-md-6">
+
+<div class="service-card">
+
+<div class="service-icon">
+<i class="bi bi-window"></i>
+</div>
+
+<h4>Software</h4>
+
+<p>
+Application errors, installation,
+updates and software-related problems.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="col-lg-3 col-md-6">
+
+<div class="service-card">
+
+<div class="service-icon">
+<i class="bi bi-printer"></i>
+</div>
+
+<h4>Printer</h4>
+
+<p>
+Printing, scanning, paper jam,
+driver and printer connectivity issues.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="col-lg-3 col-md-6">
+
+<div class="service-card">
+
+<div class="service-icon">
+<i class="bi bi-person-lock"></i>
+</div>
+
+<h4>Account & Login</h4>
+
+<p>
+Password, account access and
+login-related technical issues.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="col-lg-3 col-md-6">
+
+<div class="service-card">
+
+<div class="service-icon">
+<i class="bi bi-envelope"></i>
+</div>
+
+<h4>Email</h4>
+
+<p>
+Email access, configuration and
+email delivery-related issues.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="col-lg-3 col-md-6">
+
+<div class="service-card">
+
+<div class="service-icon">
+<i class="bi bi-projector"></i>
+</div>
+
+<h4>Smart Classroom</h4>
+
+<p>
+Projector, display, audio and
+smart classroom equipment issues.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="col-lg-3 col-md-6">
+
+<div class="service-card">
+
+<div class="service-icon">
+<i class="bi bi-three-dots"></i>
+</div>
+
+<h4>Other Issues</h4>
+
+<p>
+Report any other IT or technical
+problem not listed above.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     HOW IT WORKS
+===================================================== -->
+
+<section class="section-padding" id="how-it-works">
+
+<div class="container">
+
+<div class="text-center">
+
+<div class="text-primary-custom fw-bold">
+HOW IT WORKS
+</div>
+
+<h2 class="section-title">
+Get Support in 4 Steps
+</h2>
+
+<p class="section-subtitle">
+
+A simple process from complaint registration
+to resolution.
+
+</p>
+
+</div>
+
+
+<div class="row g-4">
+
+<div class="col-lg-3 col-md-6">
+
+<div class="step-card">
+
+<div class="step-number">01</div>
+
+<h5>Submit Complaint</h5>
+
+<p>
+Fill in the complaint form with
+accurate information.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="col-lg-3 col-md-6">
+
+<div class="step-card">
+
+<div class="step-number">02</div>
+
+<h5>Get Complaint ID</h5>
+
+<p>
+A unique complaint ID is automatically
+generated.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="col-lg-3 col-md-6">
+
+<div class="step-card">
+
+<div class="step-number">03</div>
+
+<h5>IT Team Works</h5>
+
+<p>
+The support team reviews and handles
+the technical issue.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="col-lg-3 col-md-6">
+
+<div class="step-card">
+
+<div class="step-number">04</div>
+
+<h5>Track Resolution</h5>
+
+<p>
+Track the current status using your
+Complaint ID.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     COMPLAINT FORM
+===================================================== -->
+
+<section class="section-padding bg-light" id="complaint">
+
+<div class="container">
+
+<div class="text-center">
+
+<div class="text-primary-custom fw-bold">
+IT SUPPORT REQUEST
+</div>
+
+<h2 class="section-title">
+Raise a Complaint
+</h2>
+
+<p class="section-subtitle">
+
+Describe your problem clearly so the IT
+Support Team can assist you efficiently.
+
+</p>
+
+</div>
+
+
+<div class="row justify-content-center">
+
+<div class="col-xl-9">
+
+<div class="form-wrapper">
+
+<div class="form-note">
+
+<i class="bi bi-info-circle me-2"></i>
+
+After submitting the complaint, WhatsApp will
+open with your complaint details addressed to
+<strong>7066075000</strong>.
+
+</div>
+
+
+<form id="complaintForm">
+
+<div class="row g-4">
+
+
+<!-- NAME -->
+
+<div class="col-md-6">
+
+<label class="form-label">
+Full Name *
+</label>
+
+<input
+type="text"
+class="form-control"
+id="name"
+placeholder="Enter your full name"
+required>
+
+</div>
+
+
+<!-- EMAIL -->
+
+<div class="col-md-6">
+
+<label class="form-label">
+Email Address *
+</label>
+
+<input
+type="email"
+class="form-control"
+id="email"
+placeholder="Enter your email address"
+required>
+
+</div>
+
+
+<!-- CONTACT -->
+
+<div class="col-md-6">
+
+<label class="form-label">
+Contact Number *
+</label>
+
+<input
+type="tel"
+class="form-control"
+id="contact"
+placeholder="Enter your contact number"
+required>
+
+</div>
+
+
+<!-- DEPARTMENT -->
+
+<div class="col-md-6">
+
+<label class="form-label">
+Department *
+</label>
+
+<select
+class="form-select"
+id="department"
+required>
+
+<option value="">
+Select Department
+</option>
+
+<option>
+Computer Science / IT
+</option>
+
+<option>
+Commerce
+</option>
+
+<option>
+Arts
+</option>
+
+<option>
+Science
+</option>
+
+<option>
+Administration
+</option>
+
+<option>
+Library
+</option>
+
+<option>
+Management
+</option>
+
+<option>
+Other
+</option>
+
+</select>
+
+</div>
+
+
+<!-- CATEGORY -->
+
+<div class="col-md-6">
+
+<label class="form-label">
+Issue Category *
+</label>
+
+<select
+class="form-select"
+id="category"
+required>
+
+<option value="">
+Select Category
+</option>
+
+<option>
+Hardware
+</option>
+
+<option>
+Network
+</option>
+
+<option>
+Software
+</option>
+
+<option>
+Printer
+</option>
+
+<option>
+Account/Login
+</option>
+
+<option>
+Email
+</option>
+
+<option>
+Smart Classroom
+</option>
+
+<option>
+Other
+</option>
+
+</select>
+
+</div>
+
+
+<!-- PRIORITY -->
+
+<div class="col-md-6">
+
+<label class="form-label">
+Priority *
+</label>
+
+<select
+class="form-select"
+id="priority"
+required>
+
+<option value="">
+Select Priority
+</option>
+
+<option>
+Low
+</option>
+
+<option>
+Medium
+</option>
+
+<option>
+High
+</option>
+
+</select>
+
+</div>
+
+
+<!-- TITLE -->
+
+<div class="col-12">
+
+<label class="form-label">
+Problem Title *
+</label>
+
+<input
+type="text"
+class="form-control"
+id="title"
+placeholder="Example: Computer not starting"
+required>
+
+</div>
+
+
+<!-- DESCRIPTION -->
+
+<div class="col-12">
+
+<label class="form-label">
+Problem Description *
+</label>
+
+<textarea
+class="form-control"
+id="description"
+placeholder="Explain your technical problem in detail..."
+required></textarea>
+
+</div>
+
+
+<div class="col-12">
+
+<button
+type="submit"
+class="btn btn-primary btn-lg w-100 rounded-3">
+
+<i class="bi bi-whatsapp me-2"></i>
+
+Submit Complaint & Open WhatsApp
+
+</button>
+
+</div>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     TRACK COMPLAINT
+===================================================== -->
+
+<section class="section-padding" id="track">
+
+<div class="container">
+
+<div class="text-center">
+
+<div class="text-primary-custom fw-bold">
+COMPLAINT TRACKING
+</div>
+
+<h2 class="section-title">
+Track Your Complaint
+</h2>
+
+<p class="section-subtitle">
+
+Enter your Complaint ID to check its current status.
+
+</p>
+
+</div>
+
+
+<div class="track-box">
+
+<div class="input-group">
+
+<input
+type="text"
+class="form-control"
+id="trackId"
+placeholder="Example: CMP-2026-0001">
+
+<button
+class="btn btn-primary"
+onclick="trackComplaint()">
+
+<i class="bi bi-search me-2"></i>
+
+Track
+
+</button>
+
+</div>
+
+
+<div
+id="trackResult"
+class="track-result">
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CONTACT
+===================================================== -->
+
+<section class="section-padding bg-light" id="contact">
+
+<div class="container">
+
+<div class="text-center">
+
+<div class="text-primary-custom fw-bold">
+CONTACT SUPPORT
+</div>
+
+<h2 class="section-title">
+Need Immediate Assistance?
+</h2>
+
+<p class="section-subtitle">
+
+You can directly contact the IT Support Team.
+
+</p>
+
+</div>
+
+
+<div class="row g-4">
+
+
+<div class="col-md-4">
+
+<div class="contact-card text-center">
+
+<div class="contact-icon mx-auto">
+
+<i class="bi bi-telephone"></i>
+
+</div>
+
+<h5>Call Support</h5>
+
+<p>
+Speak directly with IT Support.
+</p>
+
+<a
+href="tel:+917066075000"
+class="btn btn-outline-primary">
+
+<i class="bi bi-telephone me-2"></i>
+
+7066075000
+
+</a>
+
+</div>
+
+</div>
+
+
+<div class="col-md-4">
+
+<div class="contact-card text-center">
+
+<div class="contact-icon mx-auto">
+
+<i class="bi bi-whatsapp"></i>
+
+</div>
+
+<h5>WhatsApp Support</h5>
+
+<p>
+Send your technical query on WhatsApp.
+</p>
+
+<a
+href="https://wa.me/917066075000?text=Hello%20IT%20Support%2C%20I%20need%20technical%20assistance."
+target="_blank"
+class="btn btn-success">
+
+<i class="bi bi-whatsapp me-2"></i>
+
+Open WhatsApp
+
+</a>
+
+</div>
+
+</div>
+
+
+<div class="col-md-4">
+
+<div class="contact-card text-center">
+
+<div class="contact-icon mx-auto">
+
+<i class="bi bi-ticket-detailed"></i>
+
+</div>
+
+<h5>Raise Complaint</h5>
+
+<p>
+Register your technical problem online.
+</p>
+
+<a
+href="#complaint"
+class="btn btn-primary">
+
+<i class="bi bi-plus-circle me-2"></i>
+
+Raise Complaint
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FAQ
+===================================================== -->
+
+<section class="section-padding" id="faq">
+
+<div class="container">
+
+<div class="text-center">
+
+<div class="text-primary-custom fw-bold">
+FAQ
+</div>
+
+<h2 class="section-title">
+Frequently Asked Questions
+</h2>
+
+<p class="section-subtitle">
+
+Find quick answers to common IT Helpdesk questions.
+
+</p>
+
+</div>
+
+
+<div class="row justify-content-center">
+
+<div class="col-lg-9">
+
+<div class="accordion" id="faqAccordion">
+
+
+<!-- 1 -->
+
+<div class="accordion-item">
+
+<h2 class="accordion-header">
+
+<button
+class="accordion-button"
+data-bs-toggle="collapse"
+data-bs-target="#faq1">
+
+How do I raise an IT complaint?
+
+</button>
+
+</h2>
+
+<div
+id="faq1"
+class="accordion-collapse collapse show"
+data-bs-parent="#faqAccordion">
+
+<div class="accordion-body">
+
+Go to the Raise a Complaint section,
+fill in all required details and submit
+the form. WhatsApp will open with the
+complaint information.
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- 2 -->
+
+<div class="accordion-item">
+
+<h2 class="accordion-header">
+
+<button
+class="accordion-button collapsed"
+data-bs-toggle="collapse"
+data-bs-target="#faq2">
+
+What happens after I submit a complaint?
+
+</button>
+
+</h2>
+
+<div
+id="faq2"
+class="accordion-collapse collapse"
+data-bs-parent="#faqAccordion">
+
+<div class="accordion-body">
+
+The system generates a unique Complaint ID,
+stores the complaint and prepares a WhatsApp
+message containing your complaint details.
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- 3 -->
+
+<div class="accordion-item">
+
+<h2 class="accordion-header">
+
+<button
+class="accordion-button collapsed"
+data-bs-toggle="collapse"
+data-bs-target="#faq3">
+
+How can I track my complaint?
+
+</button>
+
+</h2>
+
+<div
+id="faq3"
+class="accordion-collapse collapse"
+data-bs-parent="#faqAccordion">
+
+<div class="accordion-body">
+
+Enter your Complaint ID in the Track Complaint
+section to view the complaint status and
+available details.
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- 4 -->
+
+<div class="accordion-item">
+
+<h2 class="accordion-header">
+
+<button
+class="accordion-button collapsed"
+data-bs-toggle="collapse"
+data-bs-target="#faq4">
+
+Where will the complaint be sent?
+
+</button>
+
+</h2>
+
+<div
+id="faq4"
+class="accordion-collapse collapse"
+data-bs-parent="#faqAccordion">
+
+<div class="accordion-body">
+
+The complaint details are prepared for
+WhatsApp number <strong>7066075000</strong>.
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- 5 -->
+
+<div class="accordion-item">
+
+<h2 class="accordion-header">
+
+<button
+class="accordion-button collapsed"
+data-bs-toggle="collapse"
+data-bs-target="#faq5">
+
+What types of issues can I report?
+
+</button>
+
+</h2>
+
+<div
+id="faq5"
+class="accordion-collapse collapse"
+data-bs-parent="#faqAccordion">
+
+<div class="accordion-body">
+
+You can report hardware, network, software,
+printer, account/login, email, smart classroom
+and other IT-related issues.
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- 6 -->
+
+<div class="accordion-item">
+
+<h2 class="accordion-header">
+
+<button
+class="accordion-button collapsed"
+data-bs-toggle="collapse"
+data-bs-target="#faq6">
+
+Can I call IT Support directly?
+
+</button>
+
+</h2>
+
+<div
+id="faq6"
+class="accordion-collapse collapse"
+data-bs-parent="#faqAccordion">
+
+<div class="accordion-body">
+
+Yes. You can call the IT Support number
+<strong>7066075000</strong> directly.
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- 7 -->
+
+<div class="accordion-item">
+
+<h2 class="accordion-header">
+
+<button
+class="accordion-button collapsed"
+data-bs-toggle="collapse"
+data-bs-target="#faq7">
+
+Can I contact IT Support through WhatsApp?
+
+</button>
+
+</h2>
+
+<div
+id="faq7"
+class="accordion-collapse collapse"
+data-bs-parent="#faqAccordion">
+
+<div class="accordion-body">
+
+Yes. The website provides direct WhatsApp
+access to the IT Support number.
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- 8 -->
+
+<div class="accordion-item">
+
+<h2 class="accordion-header">
+
+<button
+class="accordion-button collapsed"
+data-bs-toggle="collapse"
+data-bs-target="#faq8">
+
+What does "In Progress" mean?
+
+</button>
+
+</h2>
+
+<div
+id="faq8"
+class="accordion-collapse collapse"
+data-bs-parent="#faqAccordion">
+
+<div class="accordion-body">
+
+It means the support team has started working
+on the reported technical problem.
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- 9 -->
+
+<div class="accordion-item">
+
+<h2 class="accordion-header">
+
+<button
+class="accordion-button collapsed"
+data-bs-toggle="collapse"
+data-bs-target="#faq9">
+
+What does "Resolved" mean?
+
+</button>
+
+</h2>
+
+<div
+id="faq9"
+class="accordion-collapse collapse"
+data-bs-parent="#faqAccordion">
+
+<div class="accordion-body">
+
+It means the complaint has been marked as
+resolved by the support team.
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- 10 -->
+
+<div class="accordion-item">
+
+<h2 class="accordion-header">
+
+<button
+class="accordion-button collapsed"
+data-bs-toggle="collapse"
+data-bs-target="#faq10">
+
+Is the Complaint ID important?
+
+</button>
+
+</h2>
+
+<div
+id="faq10"
+class="accordion-collapse collapse"
+data-bs-parent="#faqAccordion">
+
+<div class="accordion-body">
+
+Yes. Keep your Complaint ID safe because it
+is used to track the complaint.
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- 11 -->
+
+<div class="accordion-item">
+
+<h2 class="accordion-header">
+
+<button
+class="accordion-button collapsed"
+data-bs-toggle="collapse"
+data-bs-target="#faq11">
+
+Can I submit multiple complaints?
+
+</button>
+
+</h2>
+
+<div
+id="faq11"
+class="accordion-collapse collapse"
+data-bs-parent="#faqAccordion">
+
+<div class="accordion-body">
+
+Yes. Each submission receives a separate
+Complaint ID.
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- 12 -->
+
+<div class="accordion-item">
+
+<h2 class="accordion-header">
+
+<button
+class="accordion-button collapsed"
+data-bs-toggle="collapse"
+data-bs-target="#faq12">
+
+What should I write in the problem description?
+
+</button>
+
+</h2>
+
+<div
+id="faq12"
+class="accordion-collapse collapse"
+data-bs-parent="#faqAccordion">
+
+<div class="accordion-body">
+
+Describe what happened, when the problem
+started and any error message or symptoms
+you observed.
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- 13 -->
+
+<div class="accordion-item">
+
+<h2 class="accordion-header">
+
+<button
+class="accordion-button collapsed"
+data-bs-toggle="collapse"
+data-bs-target="#faq13">
+
+Can I use the website on mobile?
+
+</button>
+
+</h2>
+
+<div
+id="faq13"
+class="accordion-collapse collapse"
+data-bs-parent="#faqAccordion">
+
+<div class="accordion-body">
+
+Yes. The website is responsive and can be
+used on desktop, tablet and mobile devices.
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- 14 -->
+
+<div class="accordion-item">
+
+<h2 class="accordion-header">
+
+<button
+class="accordion-button collapsed"
+data-bs-toggle="collapse"
+data-bs-target="#faq14">
+
+What if my issue is not listed?
+
+</button>
+
+</h2>
+
+<div
+id="faq14"
+class="accordion-collapse collapse"
+data-bs-parent="#faqAccordion">
+
+<div class="accordion-body">
+
+Select "Other" and explain the problem clearly
+in the description field.
+
+</div>
+
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     ADMIN DASHBOARD
+===================================================== -->
+
+<section class="section-padding bg-light" id="adminSection">
+
+<div class="container">
+
+<div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+
+<div>
+
+<div class="text-primary-custom fw-bold">
+ADMIN PANEL
+</div>
+
+<h2 class="fw-bold mb-0">
+Complaint Dashboard
+</h2>
+
+</div>
+
+
+<div class="d-flex gap-2">
+
+<button
+class="btn btn-outline-success"
+onclick="exportCSV()">
+
+<i class="bi bi-download me-2"></i>
+
+Export CSV
+
+</button>
+
+
+<button
+class="btn btn-outline-danger"
+onclick="adminLogout()">
+
+<i class="bi bi-box-arrow-right me-2"></i>
+
+Logout
+
+</button>
+
+</div>
+
+</div>
+
+
+<div class="admin-panel">
+
+
+<div class="row g-3 mb-4">
+
+
+<div class="col-md-3">
+
+<div class="admin-stat">
+
+<h3 id="adminTotal">
+0
+</h3>
+
+<p>Total Complaints</p>
+
+</div>
+
+</div>
+
+
+<div class="col-md-3">
+
+<div class="admin-stat">
+
+<h3 id="adminSubmitted">
+0
+</h3>
+
+<p>Submitted</p>
+
+</div>
+
+</div>
+
+
+<div class="col-md-3">
+
+<div class="admin-stat">
+
+<h3 id="adminProgress">
+0
+</h3>
+
+<p>In Progress</p>
+
+</div>
+
+</div>
+
+
+<div class="col-md-3">
+
+<div class="admin-stat">
+
+<h3 id="adminResolved">
+0
+</h3>
+
+<p>Resolved</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="table-responsive">
+
+<table class="table table-hover">
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+<th>Name</th>
+<th>Department</th>
+<th>Category</th>
+<th>Priority</th>
+<th>Status</th>
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="adminTableBody">
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+<div class="container">
+
+<div class="row">
+
+<div class="col-lg-8">
+
+<div class="footer-brand">
+
+<i class="bi bi-headset me-2"></i>
+
+IT Helpdesk
+
+</div>
+
+<p class="footer-text">
+
+A centralized IT support and complaint management
+platform designed to simplify technical support,
+complaint tracking and communication.
+
+</p>
+
+</div>
+
+
+<div class="col-lg-4 text-lg-end">
+
+<a
+href="tel:+917066075000"
+class="btn btn-outline-light rounded-pill">
+
+<i class="bi bi-telephone me-2"></i>
+
+7066075000
+
+</a>
+
+</div>
+
+</div>
+
+
+<div class="footer-bottom">
+
+<div>
+
+© <span id="currentYear"></span>
+IT Helpdesk & Complaint Management System.
+All Rights Reserved.
+
+</div>
+
+
+<div class="developer-credit">
+
+Created &amp; Designed by
+<strong>Ayush Dubey</strong>
+
+<span class="creator-role">
+
+YouTuber • Live Streamer • Creator
+
+</span>
+
+
+<a
+href="https://youtube.com/shorts/spSyj0NhU_Y?si=sOFPf-yoJ5vTYKZ_"
+target="_blank"
+rel="noopener noreferrer"
+class="youtube-link">
+
+<i class="bi bi-youtube me-1"></i>
+
+Visit My YouTube Channel
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</footer>
+
+
+
+<!-- =====================================================
+     FLOATING WHATSAPP
+===================================================== -->
+
+<a
+href="https://wa.me/917066075000?text=Hello%20IT%20Support%2C%20I%20need%20technical%20assistance."
+target="_blank"
+class="whatsapp-float"
+title="Chat on WhatsApp">
+
+<i class="bi bi-whatsapp"></i>
+
+</a>
+
+
+
+<!-- =====================================================
+     BACK TO TOP
+===================================================== -->
+
+<button
+id="backToTop"
+onclick="window.scrollTo({top:0,behavior:'smooth'})">
+
+<i class="bi bi-arrow-up"></i>
+
+</button>
+
+
+
+<!-- =====================================================
+     ADMIN LOGIN MODAL
+===================================================== -->
+
+<div
+class="modal fade"
+id="adminLoginModal"
+tabindex="-1">
+
+<div class="modal-dialog modal-dialog-centered">
+
+<div class="modal-content">
+
+<div class="modal-header">
+
+<h5 class="modal-title">
+
+<i class="bi bi-shield-lock me-2"></i>
+
+Admin Login
+
+</h5>
+
+<button
+class="btn-close"
+data-bs-dismiss="modal">
+
+</button>
+
+</div>
+
+
+<div class="modal-body">
+
+<form id="adminLoginForm">
+
+<div class="mb-3">
+
+<label class="form-label">
+Username
+</label>
+
+<input
+type="text"
+class="form-control"
+id="adminUsername"
+required>
+
+</div>
+
+
+<div class="mb-3">
+
+<label class="form-label">
+Password
+</label>
+
+<input
+type="password"
+class="form-control"
+id="adminPassword"
+required>
+
+</div>
+
+
+<button
+class="btn btn-primary w-100">
+
+<i class="bi bi-box-arrow-in-right me-2"></i>
+
+Login
+
+</button>
+
+</form>
+
+<div
+class="text-muted small mt-3 text-center">
+
+Demo credentials:
+<strong>admin</strong> /
+<strong>admin123</strong>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- =====================================================
+     COMPLAINT DETAILS MODAL
+===================================================== -->
+
+<div
+class="modal fade"
+id="complaintDetailsModal"
+tabindex="-1">
+
+<div class="modal-dialog modal-lg modal-dialog-centered">
+
+<div class="modal-content">
+
+<div class="modal-header">
+
+<h5 class="modal-title">
+
+Complaint Details
+
+</h5>
+
+<button
+class="btn-close"
+data-bs-dismiss="modal">
+
+</button>
+
+</div>
+
+
+<div
+class="modal-body"
+id="complaintDetailsBody">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- =====================================================
+     TOAST
+===================================================== -->
+
+<div class="toast-container position-fixed top-0 end-0 p-3">
+
+<div
+id="mainToast"
+class="toast"
+role="alert">
+
+<div class="toast-header">
+
+<i class="bi bi-info-circle text-primary me-2"></i>
+
+<strong class="me-auto">
+IT Helpdesk
+</strong>
+
+<button
+type="button"
+class="btn-close"
+data-bs-dismiss="toast">
+
+</button>
+
+</div>
+
+<div
+class="toast-body"
+id="toastMessage">
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<script
+src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+<script>
+
+/* =========================================================
+   CONFIGURATION
+========================================================= */
+
+const STORAGE_KEY =
+"it_helpdesk_complaints_v1";
+
+const COUNTER_KEY =
+"it_helpdesk_counter_v1";
+
+const WHATSAPP_NUMBER =
+"917066075000";
+
+let adminLoggedIn = false;
+
+
+
+/* =========================================================
+   LOADER
+========================================================= */
+
+window.addEventListener("load",function(){
+
+    setTimeout(function(){
+
+        const loader =
+        document.getElementById("loader");
+
+        loader.style.opacity="0";
+
+        setTimeout(function(){
+            loader.style.display="none";
+        },500);
+
+    },700);
+
+});
+
+
+
+/* =========================================================
+   YEAR
+========================================================= */
+
+document.getElementById("currentYear")
+.textContent =
+new Date().getFullYear();
+
+
+
+/* =========================================================
+   LOCAL STORAGE
+========================================================= */
+
+function getComplaints(){
+
+    try{
+
+        return JSON.parse(
+            localStorage.getItem(STORAGE_KEY)
+        ) || [];
+
+    }catch(error){
+
+        return [];
+
+    }
+
+}
+
+
+function saveComplaints(complaints){
+
+    localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(complaints)
+    );
+
+}
+
+
+
+/* =========================================================
+   COMPLAINT ID
+========================================================= */
+
+function generateComplaintId(){
+
+    let counter =
+    parseInt(
+        localStorage.getItem(COUNTER_KEY) || "0"
+    );
+
+    counter++;
+
+    localStorage.setItem(
+        COUNTER_KEY,
+        counter
+    );
+
+    const year =
+    new Date().getFullYear();
+
+    return "CMP-" +
+    year +
+    "-" +
+    String(counter).padStart(4,"0");
+
+}
+
+
+
+/* =========================================================
+   STATUS CLASS
+========================================================= */
+
+function getStatusClass(status){
+
+    if(status === "Submitted"){
+        return "status-submitted";
+    }
+
+    if(status === "Assigned"){
+        return "status-assigned";
+    }
+
+    if(status === "In Progress"){
+        return "status-progress";
+    }
+
+    if(status === "Resolved"){
+        return "status-resolved";
+    }
+
+    return "status-submitted";
+
+}
+
+
+
+/* =========================================================
+   UPDATE PUBLIC STATS
+========================================================= */
+
+function updateStats(){
+
+    const complaints =
+    getComplaints();
+
+    const total =
+    complaints.length;
+
+    const submitted =
+    complaints.filter(
+        c => c.status === "Submitted"
+    ).length;
+
+    const progress =
+    complaints.filter(
+        c =>
+        c.status === "In Progress" ||
+        c.status === "Assigned"
+    ).length;
+
+    const resolved =
+    complaints.filter(
+        c => c.status === "Resolved"
+    ).length;
+
+
+    document.getElementById(
+        "totalComplaints"
+    ).textContent = total;
+
+
+    document.getElementById(
+        "submittedComplaints"
+    ).textContent = submitted;
+
+
+    document.getElementById(
+        "progressComplaints"
+    ).textContent = progress;
+
+
+    document.getElementById(
+        "resolvedComplaints"
+    ).textContent = resolved;
+
+}
+
+
+
+/* =========================================================
+   COMPLAINT FORM
+========================================================= */
+
+document
+.getElementById("complaintForm")
+.addEventListener("submit",function(event){
+
+    event.preventDefault();
+
+
+    const name =
+    document.getElementById("name")
+    .value.trim();
+
+
+    const email =
+    document.getElementById("email")
+    .value.trim();
+
+
+    const contact =
+    document.getElementById("contact")
+    .value.trim();
+
+
+    const department =
+    document.getElementById("department")
+    .value;
+
+
+    const category =
+    document.getElementById("category")
+    .value;
+
+
+    const priority =
+    document.getElementById("priority")
+    .value;
+
+
+    const title =
+    document.getElementById("title")
+    .value.trim();
+
+
+    const description =
+    document.getElementById("description")
+    .value.trim();
+
+
+    if(
+        !name ||
+        !email ||
+        !contact ||
+        !department ||
+        !category ||
+        !priority ||
+        !title ||
+        !description
+    ){
+
+        alert(
+            "Please fill all required fields."
+        );
+
+        return;
+
+    }
+
+
+    const now =
+    new Date().toISOString();
+
+
+    const complaintId =
+    generateComplaintId();
+
+
+    const complaint = {
+
+        id:complaintId,
+
+        name:name,
+
+        email:email,
+
+        contact:contact,
+
+        department:department,
+
+        category:category,
+
+        priority:priority,
+
+        title:title,
+
+        description:description,
+
+        status:"Submitted",
+
+        assignedTo:"Not Assigned",
+
+        resolution:"",
+
+        createdAt:now,
+
+        updatedAt:now,
+
+        timeline:[
+
+            {
+
+                status:"Submitted",
+
+                date:now,
+
+                note:
+                "Complaint submitted successfully."
+
+            }
+
+        ]
+
+    };
+
+
+    const complaints =
+    getComplaints();
+
+
+    complaints.unshift(
+        complaint
+    );
+
+
+    saveComplaints(
+        complaints
+    );
+
+
+    updateStats();
+
+
+    if(adminLoggedIn){
+
+        updateAdminStats();
+
+        renderAdminTable();
+
+    }
+
+
+    /* =====================================================
+       WHATSAPP MESSAGE
+    ===================================================== */
+
+    const message =
+
+`🚨 NEW IT SUPPORT COMPLAINT
+
+📌 Complaint ID:
+${complaint.id}
+
+👤 Name:
+${complaint.name}
+
+📧 Email:
+${complaint.email}
+
+📱 Contact:
+${complaint.contact}
+
+🏫 Department:
+${complaint.department}
+
+🛠️ Category:
+${complaint.category}
+
+⚡ Priority:
+${complaint.priority}
+
+📝 Problem Title:
+${complaint.title}
+
+📄 Problem Description:
+${complaint.description}
+
+━━━━━━━━━━━━━━━━━━
+
+IT Helpdesk & Complaint Management System`;
+
+
+    const whatsappURL =
+    "https://wa.me/" +
+    WHATSAPP_NUMBER +
+    "?text=" +
+    encodeURIComponent(message);
+
+
+    /*
+       Open WhatsApp in a new tab/window.
+       If browser blocks it, open in same tab.
+    */
+
+    const whatsappWindow =
+    window.open(
+        whatsappURL,
+        "_blank"
+    );
+
+
+    if(!whatsappWindow){
+
+        window.location.href =
+        whatsappURL;
+
+    }
+
+
+    /* =====================================================
+       RESET FORM
+    ===================================================== */
+
+    document
+    .getElementById("complaintForm")
+    .reset();
+
+
+    showToast(
+        "Complaint " +
+        complaint.id +
+        " created successfully."
+    );
+
+});
+
+
+
+/* =========================================================
+   TRACK COMPLAINT
+========================================================= */
+
+function trackComplaint(){
+
+    const id =
+    document.getElementById("trackId")
+    .value
+    .trim()
+    .toUpperCase();
+
+
+    const result =
+    document.getElementById(
+        "trackResult"
+    );
+
+
+    if(!id){
+
+        result.style.display="block";
+
+        result.innerHTML = `
+
+        <div class="alert alert-warning">
+
+        <i class="bi bi-exclamation-circle me-2"></i>
+
+        Please enter a Complaint ID.
+
+        </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    const complaints =
+    getComplaints();
+
+
+    const complaint =
+    complaints.find(
+        c => c.id.toUpperCase() === id
+    );
+
+
+    result.style.display="block";
+
+
+    if(!complaint){
+
+        result.innerHTML = `
+
+        <div class="alert alert-danger">
+
+        <i class="bi bi-x-circle me-2"></i>
+
+        Complaint not found.
+
+        Please check your Complaint ID.
+
+        </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    const createdDate =
+    new Date(
+        complaint.createdAt
+    ).toLocaleString();
+
+
+    const updatedDate =
+    new Date(
+        complaint.updatedAt
+    ).toLocaleString();
+
+
+    result.innerHTML = `
+
+    <div class="complaint-summary">
+
+        <div class="d-flex justify-content-between
+        align-items-center flex-wrap gap-2 mb-3">
+
+            <div>
+
+                <small class="text-muted">
+                Complaint ID
+                </small>
+
+                <h5 class="fw-bold mb-0">
+                ${escapeHtml(complaint.id)}
+                </h5>
+
+            </div>
+
+            <span class="status-badge
+            ${getStatusClass(complaint.status)}">
+
+                ${escapeHtml(complaint.status)}
+
+            </span>
+
+        </div>
+
+
+        <hr>
+
+
+        <div class="row g-3">
+
+            <div class="col-md-6">
+
+                <small class="text-muted">
+                Name
+                </small>
+
+                <div class="fw-semibold">
+                ${escapeHtml(complaint.name)}
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6">
+
+                <small class="text-muted">
+                Department
+                </small>
+
+                <div class="fw-semibold">
+                ${escapeHtml(complaint.department)}
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6">
+
+                <small class="text-muted">
+                Category
+                </small>
+
+                <div class="fw-semibold">
+                ${escapeHtml(complaint.category)}
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6">
+
+                <small class="text-muted">
+                Priority
+                </small>
+
+                <div class="fw-semibold">
+                ${escapeHtml(complaint.priority)}
+                </div>
+
+            </div>
+
+
+            <div class="col-12">
+
+                <small class="text-muted">
+                Problem
+                </small>
+
+                <div class="fw-semibold">
+                ${escapeHtml(complaint.title)}
+                </div>
+
+                <p class="text-muted mt-2 mb-0">
+                ${escapeHtml(complaint.description)}
+                </p>
+
+            </div>
+
+
+            <div class="col-md-6">
+
+                <small class="text-muted">
+                Created
+                </small>
+
+                <div>
+                ${createdDate}
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6">
+
+                <small class="text-muted">
+                Last Updated
+                </small>
+
+                <div>
+                ${updatedDate}
+                </div>
+
+            </div>
+
+
+            <div class="col-12">
+
+                <small class="text-muted">
+                Assigned To
+                </small>
+
+                <div class="fw-semibold">
+                ${escapeHtml(complaint.assignedTo)}
+                </div>
+
+            </div>
+
+
+            ${
+                complaint.resolution
+                ?
+                `
+
+                <div class="col-12">
+
+                    <div class="alert alert-success mb-0">
+
+                        <strong>
+                        Resolution:
+                        </strong>
+
+                        ${escapeHtml(
+                            complaint.resolution
+                        )}
+
+                    </div>
+
+                </div>
+
+                `
+                :
+                ""
+            }
+
+        </div>
+
+    </div>
+
+    `;
+
+}
+
+
+
+/* =========================================================
+   ADMIN LOGIN
+========================================================= */
+
+function openAdminLogin(){
+
+    const modal =
+    new bootstrap.Modal(
+        document.getElementById(
+            "adminLoginModal"
+        )
+    );
+
+    modal.show();
+
+}
+
+
+document
+.getElementById("adminLoginForm")
+.addEventListener("submit",function(event){
+
+    event.preventDefault();
+
+
+    const username =
+    document.getElementById(
+        "adminUsername"
+    ).value.trim();
+
+
+    const password =
+    document.getElementById(
+        "adminPassword"
+    ).value;
+
+
+    if(
+        username === "admin" &&
+        password === "admin123"
+    ){
+
+        adminLoggedIn = true;
+
+
+        const modal =
+        bootstrap.Modal.getInstance(
+            document.getElementById(
+                "adminLoginModal"
+            )
+        );
+
+
+        modal.hide();
+
+
+        document.getElementById(
+            "adminSection"
+        ).style.display="block";
+
+
+        updateAdminStats();
+
+        renderAdminTable();
+
+
+        document
+        .getElementById("adminSection")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+
+
+        showToast(
+            "Admin login successful."
+        );
+
+    }else{
+
+        alert(
+            "Invalid username or password."
+        );
+
+    }
+
+});
+
+
+
+/* =========================================================
+   ADMIN STATS
+========================================================= */
+
+function updateAdminStats(){
+
+    const complaints =
+    getComplaints();
+
+
+    document.getElementById(
+        "adminTotal"
+    ).textContent =
+    complaints.length;
+
+
+    document.getElementById(
+        "adminSubmitted"
+    ).textContent =
+
+    complaints.filter(
+        c => c.status === "Submitted"
+    ).length;
+
+
+    document.getElementById(
+        "adminProgress"
+    ).textContent =
+
+    complaints.filter(
+        c =>
+        c.status === "In Progress" ||
+        c.status === "Assigned"
+    ).length;
+
+
+    document.getElementById(
+        "adminResolved"
+    ).textContent =
+
+    complaints.filter(
+        c => c.status === "Resolved"
+    ).length;
+
+}
+
+
+
+/* =========================================================
+   ADMIN TABLE
+========================================================= */
+
+function renderAdminTable(){
+
+    const tbody =
+    document.getElementById(
+        "adminTableBody"
+    );
+
+
+    const complaints =
+    getComplaints();
+
+
+    if(complaints.length === 0){
+
+        tbody.innerHTML = `
+
+        <tr>
+
+            <td
+            colspan="7"
+            class="text-center text-muted py-4">
+
+            No complaints found.
+
+            </td>
+
+        </tr>
+
+        `;
+
+        return;
+
+    }
+
+
+    tbody.innerHTML =
+    complaints.map(
+        complaint => `
+
+        <tr>
+
+            <td>
+            <strong>
+            ${escapeHtml(complaint.id)}
+            </strong>
+            </td>
+
+            <td>
+            ${escapeHtml(complaint.name)}
+            </td>
+
+            <td>
+            ${escapeHtml(complaint.department)}
+            </td>
+
+            <td>
+            ${escapeHtml(complaint.category)}
+            </td>
+
+            <td>
+            ${escapeHtml(complaint.priority)}
+            </td>
+
+            <td>
+
+            <span class="status-badge
+            ${getStatusClass(complaint.status)}">
+
+            ${escapeHtml(complaint.status)}
+
+            </span>
+
+            </td>
+
+            <td>
+
+            <button
+            class="btn btn-sm btn-primary"
+            onclick="viewComplaint('${complaint.id}')">
+
+            <i class="bi bi-eye"></i>
+
+            </button>
+
+            </td>
+
+        </tr>
+
+        `
+    ).join("");
+
+}
+
+
+
+/* =========================================================
+   VIEW COMPLAINT
+========================================================= */
+
+function viewComplaint(id){
+
+    const complaints =
+    getComplaints();
+
+
+    const complaint =
+    complaints.find(
+        c => c.id === id
+    );
+
+
+    if(!complaint){
+        return;
+    }
+
+
+    const body =
+    document.getElementById(
+        "complaintDetailsBody"
+    );
+
+
+    body.innerHTML = `
+
+    <div class="row g-3">
+
+        <div class="col-md-6">
+
+            <small class="text-muted">
+            Complaint ID
+            </small>
+
+            <h5 class="fw-bold">
+            ${escapeHtml(complaint.id)}
+            </h5>
+
+        </div>
+
+
+        <div class="col-md-6">
+
+            <small class="text-muted">
+            Current Status
+            </small>
+
+            <div>
+
+                <span class="status-badge
+                ${getStatusClass(complaint.status)}">
+
+                ${escapeHtml(complaint.status)}
+
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-6">
+
+            <label class="form-label">
+            Name
+            </label>
+
+            <input
+            class="form-control"
+            value="${escapeAttribute(complaint.name)}"
+            readonly>
+
+        </div>
+
+
+        <div class="col-md-6">
+
+            <label class="form-label">
+            Contact
+            </label>
+
+            <input
+            class="form-control"
+            value="${escapeAttribute(complaint.contact)}"
+            readonly>
+
+        </div>
+
+
+        <div class="col-md-6">
+
+            <label class="form-label">
+            Department
+            </label>
+
+            <input
+            class="form-control"
+            value="${escapeAttribute(complaint.department)}"
+            readonly>
+
+        </div>
+
+
+        <div class="col-md-6">
+
+            <label class="form-label">
+            Category
+            </label>
+
+            <input
+            class="form-control"
+            value="${escapeAttribute(complaint.category)}"
+            readonly>
+
+        </div>
+
+
+        <div class="col-12">
+
+            <label class="form-label">
+            Problem
+            </label>
+
+            <div class="complaint-summary">
+
+                <strong>
+                ${escapeHtml(complaint.title)}
+                </strong>
+
+                <p class="mb-0 mt-2 text-muted">
+                ${escapeHtml(complaint.description)}
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-6">
+
+            <label class="form-label">
+            Update Status
+            </label>
+
+            <select
+            class="form-select"
+            id="updateStatus">
+
+                <option
+                ${complaint.status==="Submitted"?"selected":""}>
+                Submitted
+                </option>
+
+                <option
+                ${complaint.status==="Assigned"?"selected":""}>
+                Assigned
+                </option>
+
+                <option
+                ${complaint.status==="In Progress"?"selected":""}>
+                In Progress
+                </option>
+
+                <option
+                ${complaint.status==="Resolved"?"selected":""}>
+                Resolved
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="col-md-6">
+
+            <label class="form-label">
+            Assigned To
+            </label>
+
+            <select
+            class="form-select"
+            id="updateAssigned">
+
+                <option
+                ${complaint.assignedTo==="Not Assigned"?"selected":""}>
+                Not Assigned
+                </option>
+
+                <option
+                ${complaint.assignedTo==="IT Support Team"?"selected":""}>
+                IT Support Team
+                </option>
+
+                <option
+                ${complaint.assignedTo==="Network Administrator"?"selected":""}>
+                Network Administrator
+                </option>
+
+                <option
+                ${complaint.assignedTo==="Hardware Technician"?"selected":""}>
+                Hardware Technician
+                </option>
+
+                <option
+                ${complaint.assignedTo==="Software Support"?"selected":""}>
+                Software Support
+                </option>
+
+                <option
+                ${complaint.assignedTo==="System Administrator"?"selected":""}>
+                System Administrator
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="col-12">
+
+            <label class="form-label">
+            Resolution / Admin Note
+            </label>
+
+            <textarea
+            class="form-control"
+            id="updateResolution"
+            placeholder="Enter resolution or admin note...">${escapeHtml(complaint.resolution || "")}</textarea>
+
+        </div>
+
+
+        <div class="col-12">
+
+            <button
+            class="btn btn-primary w-100"
+            onclick="updateComplaint('${complaint.id}')">
+
+            <i class="bi bi-check2-circle me-2"></i>
+
+            Save Changes
+
+            </button>
+
+        </div>
+
+    </div>
+
+    `;
+
+
+    const modal =
+    new bootstrap.Modal(
+        document.getElementById(
+            "complaintDetailsModal"
+        )
+    );
+
+
+    modal.show();
+
+}
+
+
+
+/* =========================================================
+   UPDATE COMPLAINT
+========================================================= */
+
+function updateComplaint(id){
+
+    const complaints =
+    getComplaints();
+
+
+    const index =
+    complaints.findIndex(
+        c => c.id === id
+    );
+
+
+    if(index === -1){
+        return;
+    }
+
+
+    const complaint =
+    complaints[index];
+
+
+    const newStatus =
+    document.getElementById(
+        "updateStatus"
+    ).value;
+
+
+    const newAssigned =
+    document.getElementById(
+        "updateAssigned"
+    ).value;
+
+
+    const newResolution =
+    document.getElementById(
+        "updateResolution"
+    ).value.trim();
+
+
+    const now =
+    new Date().toISOString();
+
+
+    if(
+        complaint.status !== newStatus
+    ){
+
+        complaint.timeline.push({
+
+            status:newStatus,
+
+            date:now,
+
+            note:
+            "Status updated by admin."
+
+        });
+
+    }
+
+
+    complaint.status =
+    newStatus;
+
+
+    complaint.assignedTo =
+    newAssigned;
+
+
+    complaint.resolution =
+    newResolution;
+
+
+    complaint.updatedAt =
+    now;
+
+
+    complaints[index] =
+    complaint;
+
+
+    saveComplaints(
+        complaints
+    );
+
+
+    updateStats();
+
+    updateAdminStats();
+
+    renderAdminTable();
+
+
+    const modal =
+    bootstrap.Modal.getInstance(
+        document.getElementById(
+            "complaintDetailsModal"
+        )
+    );
+
+
+    modal.hide();
+
+
+    showToast(
+        "Complaint updated successfully."
+    );
+
+}
+
+
+
+/* =========================================================
+   ADMIN LOGOUT
+========================================================= */
+
+function adminLogout(){
+
+    adminLoggedIn = false;
+
+
+    document.getElementById(
+        "adminSection"
+    ).style.display="none";
+
+
+    showToast(
+        "Admin logged out."
+    );
+
+}
+
+
+
+/* =========================================================
+   CSV EXPORT
+========================================================= */
+
+function exportCSV(){
+
+    const complaints =
+    getComplaints();
+
+
+    if(complaints.length === 0){
+
+        alert(
+            "No complaints available for export."
+        );
+
+        return;
+
+    }
+
+
+    const headers = [
+
+        "Complaint ID",
+        "Name",
+        "Email",
+        "Contact",
+        "Department",
+        "Category",
+        "Priority",
+        "Title",
+        "Description",
+        "Status",
+        "Assigned To",
+        "Resolution",
+        "Created At",
+        "Updated At"
+
+    ];
+
+
+    const rows =
+    complaints.map(c => [
+
+        c.id,
+        c.name,
+        c.email,
+        c.contact,
+        c.department,
+        c.category,
+        c.priority,
+        c.title,
+        c.description,
+        c.status,
+        c.assignedTo,
+        c.resolution,
+        c.createdAt,
+        c.updatedAt
+
+    ]);
+
+
+    const csv = [
+
+        headers,
+
+        ...rows
+
+    ].map(
+
+        row => row.map(
+
+            value =>
+            `"${String(value ?? "")
+            .replace(/"/g,'""')}"`
+
+        ).join(",")
+
+    ).join("\n");
+
+
+    const blob =
+    new Blob(
+        [csv],
+        {
+            type:"text/csv;charset=utf-8;"
+        }
+    );
+
+
+    const url =
+    URL.createObjectURL(blob);
+
+
+    const link =
+    document.createElement("a");
+
+
+    link.href = url;
+
+    link.download =
+    "IT_Helpdesk_Complaints.csv";
+
+
+    document.body.appendChild(link);
+
+    link.click();
+
+    document.body.removeChild(link);
+
+    URL.revokeObjectURL(url);
+
+}
+
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+function toggleDarkMode(){
+
+    document.body.classList.toggle(
+        "dark-mode"
+    );
+
+
+    const dark =
+    document.body.classList.contains(
+        "dark-mode"
+    );
+
+
+    localStorage.setItem(
+        "it_helpdesk_dark_mode",
+        dark ? "1" : "0"
+    );
+
+
+    const icon =
+    document.getElementById(
+        "darkModeIcon"
+    );
+
+
+    if(dark){
+
+        icon.className =
+        "bi bi-sun";
+
+    }else{
+
+        icon.className =
+        "bi bi-moon-stars";
+
+    }
+
+}
+
+
+if(
+    localStorage.getItem(
+        "it_helpdesk_dark_mode"
+    ) === "1"
+){
+
+    document.body.classList.add(
+        "dark-mode"
+    );
+
+    document.getElementById(
+        "darkModeIcon"
+    ).className =
+    "bi bi-sun";
+
+}
+
+
+
+/* =========================================================
+   ADMIN SHORTCUT
+   CTRL + SHIFT + A
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.ctrlKey &&
+            event.shiftKey &&
+            event.key.toLowerCase() === "a"
+        ){
+
+            event.preventDefault();
+
+            if(adminLoggedIn){
+
+                document.getElementById(
+                    "adminSection"
+                ).style.display="block";
+
+                document.getElementById(
+                    "adminSection"
+                ).scrollIntoView({
+                    behavior:"smooth"
+                });
+
+            }else{
+
+                openAdminLogin();
+
+            }
+
+        }
+
+    }
+);
+
+
+
+/* =========================================================
+   FOOTER ADMIN ACCESS
+========================================================= */
+
+document
+.querySelector(".footer-bottom")
+.addEventListener(
+    "dblclick",
+    function(){
+
+        if(adminLoggedIn){
+
+            document.getElementById(
+                "adminSection"
+            ).style.display="block";
+
+        }else{
+
+            openAdminLogin();
+
+        }
+
+    }
+);
+
+
+
+/* =========================================================
+   BACK TO TOP
+========================================================= */
+
+window.addEventListener(
+    "scroll",
+    function(){
+
+        const button =
+        document.getElementById(
+            "backToTop"
+        );
+
+
+        if(window.scrollY > 400){
+
+            button.style.display =
+            "flex";
+
+        }else{
+
+            button.style.display =
+            "none";
+
+        }
+
+    }
+);
+
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+function showToast(message){
+
+    document.getElementById(
+        "toastMessage"
+    ).textContent = message;
+
+
+    const toast =
+    new bootstrap.Toast(
+        document.getElementById(
+            "mainToast"
+        )
+    );
+
+
+    toast.show();
+
+}
+
+
+
+/* =========================================================
+   SECURITY / HTML ESCAPE
+========================================================= */
+
+function escapeHtml(value){
+
+    return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+function escapeAttribute(value){
+
+    return escapeHtml(value);
+
+}
+
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+updateStats();
+
+</script>
+
+
+</body>
+</html>
